@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>ZYCSSGXX 🐉 我的世界启动器</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/zycssgxx.ico">
+<link rel="apple-touch-icon" href="assets/logo_b.png">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+</head>
+<body>
+
+<!-- 闪屏 -->
+<div id="splash" class="splash">
+  <div class="splash-content">
+    <div class="splash-row">
+      <img src="assets/zycssgxx.ico" class="splash-icon" alt="">
+      <img src="assets/logo_b.png" class="splash-logo" alt="">
+    </div>
+    <h1 class="splash-title">ZYCSSGXX</h1>
+    <p class="splash-sub">我的世界启动器 · 手机伴侣</p>
+    <p class="splash-dots">● ● ●</p>
+  </div>
+</div>
+
+<!-- 主界面 -->
+<div id="app" class="app hidden">
+
+  <!-- 顶栏 -->
+  <header class="topbar">
+    <img src="assets/zycssgxx.ico" class="topbar-icon" alt="">
+    <div class="topbar-title">ZYCSSGXX</div>
+    <div class="topbar-account" id="topAccount">
+      <span class="avatar" id="topAvatar">?</span>
+      <span class="uname" id="topUname">未登录</span>
+    </div>
+  </header>
+
+  <!-- 页面容器 -->
+  <main class="pages">
+
+    <!-- 首页 -->
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <img src="assets/logo_b.png" class="hero-logo" alt="">
+        <h2>欢迎回来</h2>
+        <p class="hero-sub">v1.4.0 · 纯离线免正版</p>
+      </div>
+
+      <div class="card">
+        <h3>🎮 迷你方块世界</h3>
+        <p class="card-text">手机上玩启动器内置的方块世界！虚拟摇杆 + 跳跃 + 放置/破坏方块。</p>
+        <button class="primary" id="enterGameBtn" style="width:100%;margin-top:8px">🚀 进入游戏</button>
+      </div>
+
+      <div class="card" id="homeAccountCard">
+        <h3>👤 账号</h3>
+        <div id="accountPanelMini"></div>
+      </div>
+
+      <div class="card">
+        <h3>🔗 快速链接</h3>
+        <div class="links">
+          <a class="link-btn" href="https://github.com/z-Y-c-2013/ZYCSSGXX" target="_blank">📦 GitHub 仓库</a>
+          <a class="link-btn" href="#">💻 下载桌面版</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 游戏页（MC 启动器界面） -->
+    <section class="page" id="page-game">
+      <div class="mc-top">
+        <div class="mc-title-bar">
+          <img src="assets/zycssgxx.ico" class="mc-top-icon" alt="">
+          <div class="mc-title">启动游戏</div>
+          <div class="mc-platform" id="mcPlatform">检测中...</div>
+        </div>
+      </div>
+
+      <!-- 账号选择 -->
+      <div class="mc-section">
+        <div class="mc-section-head">
+          <span class="mc-section-title">👤 选择账号</span>
+          <a class="mc-section-link" href="#account-tab">管理</a>
+        </div>
+        <div id="mcAccountArea"></div>
+      </div>
+
+      <!-- 版本选择 -->
+      <div class="mc-section">
+        <div class="mc-section-head">
+          <span class="mc-section-title">🎮 选择版本</span>
+          <button class="mc-refresh" id="mcRefreshBtn">🔄 刷新</button>
+        </div>
+        <div id="mcVersionArea"><div class="mc-loader-spinner"></div></div>
+      </div>
+
+      <!-- 启动按钮 -->
+      <div class="mc-launch-area">
+        <button class="mc-launch-btn" id="mcLaunchBtn" disabled>加载中...</button>
+      </div>
+
+      <!-- 说明 -->
+      <div class="mc-info">
+        <p><b>💡 使用说明：</b></p>
+        <p>1. 首次启动会自动拉取 Mojang 官方版本列表</p>
+        <p>2. Android 用户需要先安装 <b>PojavLauncher</b>（免费开源）</p>
+        <p>3. Pojav 安装好后，ZYCSSGXX 点启动会自动唤起</p>
+        <p>4. Fabric/Forge 模组也可以在 Pojav 里装</p>
+        <p class="mc-info-link">👉 <a href="https://github.com/PojavLauncherTeam/PojavLauncher/releases" target="_blank">下载 PojavLauncher APK</a></p>
+      </div>
+    </section>
+
+    <!-- 聊天页 -->
+    <section class="page" id="page-chat">
+      <div class="chat-header">
+        <h3>💬 聊天</h3>
+        <span class="conn-dot" id="connDot"></span>
+      </div>
+      <div id="friendList" class="friend-list"></div>
+      <div id="chatArea" class="chat-area hidden">
+        <div class="chat-head">
+          <button class="back-btn" id="chatBack">←</button>
+          <span id="chatWith">聊天</span>
+        </div>
+        <div class="chat-log" id="chatLog"></div>
+        <div class="chat-input">
+          <input type="text" id="msgInput" placeholder="发消息..." autocomplete="off">
+          <button id="sendBtn">发送</button>
+        </div>
+      </div>
+      <div id="chatEmpty" class="empty-hint">
+        <p>👆 还没有好友？</p>
+        <p class="small">去「账号」页添加好友</p>
+      </div>
+    </section>
+
+    <!-- 模组页 -->
+    <section class="page" id="page-mods">
+      <div class="mod-header">
+        <h3>📦 热门模组</h3>
+        <input type="text" id="modSearch" placeholder="搜索模组...">
+      </div>
+      <div id="modList" class="mod-list"></div>
+      <div id="modLoading" class="loading">加载中...</div>
+    </section>
+
+    <!-- 账户页 -->
+    <section class="page" id="page-account">
+      <div class="card">
+        <h3>🔐 登录 / 注册</h3>
+        <div id="authPanel"></div>
+      </div>
+      <div class="card">
+        <h3>👥 添加好友</h3>
+        <input type="text" id="addFriendInput" placeholder="输入对方账号名">
+        <button id="addFriendBtn" class="primary">发送好友请求</button>
+        <div id="friendRequests" class="friend-requests"></div>
+      </div>
+      <div class="card">
+        <h3>👕 我的皮肤</h3>
+        <div class="skin-preview" id="skinPreview"></div>
+      </div>
+    </section>
+
+    <!-- 设置页 -->
+    <section class="page" id="page-settings">
+      <div class="card">
+        <h3>⚙️ 服务器地址</h3>
+        <label>聊天服务器（ws://...）</label>
+        <input type="text" id="setChatUrl" placeholder="wss://your-chat.onrender.com">
+        <button id="saveSettings" class="primary">保存</button>
+      </div>
+      <div class="card">
+        <h3>ℹ️ 关于</h3>
+        <p class="card-text">
+          <b>ZYCSSGXX v1.4.0</b> 手机伴侣版<br>
+          作者：z-Y-c-2013<br>
+          GitHub: github.com/z-Y-c-2013/ZYCSSGXX<br>
+          <br>
+          免费开源 · 纯离线 · 免正版
+        </p>
+      </div>
+      <div class="card">
+        <h3>🗑️ 清除数据</h3>
+        <button id="clearData" class="danger">清除全部本地数据</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 底部 Tab -->
+  <nav class="tabbar">
+    <button class="tab active" data-page="home">
+      <span class="ti">🏠</span><span class="tl">首页</span>
+    </button>
+    <button class="tab" data-page="game">
+      <span class="ti">🎮</span><span class="tl">游戏</span>
+      <span class="badge" id="gameBadge">new</span>
+    </button>
+    <button class="tab" data-page="chat">
+      <span class="ti">💬</span><span class="tl">聊天</span>
+    </button>
+    <button class="tab" data-page="mods">
+      <span class="ti">📦</span><span class="tl">模组</span>
+    </button>
+    <button class="tab" data-page="account">
+      <span class="ti">👤</span><span class="tl">账号</span>
+    </button>
+    <button class="tab" data-page="settings">
+      <span class="ti">⚙️</span><span class="tl">设置</span>
+    </button>
+  </nav>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast hidden"></div>
+
+<script src="game.js"></script>
+<script src="app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
+
