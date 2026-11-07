@@ -1,0 +1,11 @@
+{
+  "appId": "com.zycssgxx.launcher",
+  "appName": "ZYCSSGXX",
+  "webDir": "www",
+  "server": {
+    "allowNavigation": ["*"]
+  },
+  "android": {
+    "backgroundColor": "#ffffff"
+  }
+}
