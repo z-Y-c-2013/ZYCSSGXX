@@ -1,0 +1,20 @@
+﻿{
+  "name": "zycssgxx-mobile",
+  "version": "1.4.0",
+  "description": "ZYCSSGXX Minecraft Launcher Mobile",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo No build step required",
+    "cap:init": "npx cap init ZYCSSGXX com.zycssgxx.launcher --web-dir=.",
+    "cap:android": "npx cap add android",
+    "cap:sync": "npx cap sync android",
+    "cap:build": "cd android && .\\gradlew.bat assembleDebug"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/android": "^6.0.0"
+  }
+}
