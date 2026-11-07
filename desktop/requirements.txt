@@ -1,0 +1,3 @@
+customtkinter>=6.0
+minecraft-launcher-lib>=8.0
+websocket-client>=1.6
