@@ -1,25 +1,24 @@
 {
-  "name": "ZYCSSGXX 我的世界启动器",
+  "name": "ZYCSSGXX 🐉 我的世界启动器",
   "short_name": "ZYCSSGXX",
-  "description": "纯离线免正版的 Minecraft 启动器手机伴侣版",
-  "start_url": "index.html",
+  "id": "com.zycssgxx.launcher",
+  "description": "纯离线免正版 · Minecraft 启动器手机伴侣版",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["games", "utilities"],
   "icons": [
-    {
-      "src": "../assets/logo_b.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "../assets/logo_b.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "assets/screen-home.png", "sizes": "1280x720", "type": "image/png", "label": "首页" },
+    { "src": "assets/screen-game.png", "sizes": "1280x720", "type": "image/png", "label": "启动游戏" }
   ]
 }
